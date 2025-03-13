@@ -8,6 +8,7 @@ La funcionalidad implementada realiza el alternado del _LED2_ (Pin `PA5`) cada 1
 
 ## Configuración
 
-1. Asociar `LD2` al PIN `GPIO:PA5`
+1. Setear el label `LD2` para el PIN `GPIO:PA5`
+2. Configurar el modo `GPIO:output`
 
 ![pins](../images/practica0-pin-assigments.png)
