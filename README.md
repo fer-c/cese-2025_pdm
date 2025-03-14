@@ -20,6 +20,8 @@ Practicas desarrollados para la placa [STM32F446RE](https://www.st.com/en/evalua
 
 - [STM32CubeMX User Manual](docs/um1718-stm32cubemx-for-stm32-configuration-and-initialization-c-code-generation-stmicroelectronics.pdf)
 
+- [NUCLEO-XXXXRX schematic](docs/mb1136-default-c04_schematic.pdf)
+
 ## Software necesario
 
 - [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html): Integrated Development Environment for STM32
