@@ -40,8 +40,14 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
+#define T_100MS 100
+#define T_200MS 200
+#define T_1S 1000
+#define MAX_TIMES 5
+
 typedef uint32_t tick_t; // Qué biblioteca se debe incluir para que esto compile?
 typedef bool bool_t;	  // Qué biblioteca se debe incluir para que esto compile?
+typedef uint8_t idx_t;
 
 typedef struct{
    tick_t startTime;

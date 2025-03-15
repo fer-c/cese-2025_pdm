@@ -62,7 +62,6 @@ void delayInit( delay_t * delay, tick_t duration ) {
 	delay->startTime = 0;
 	delay->duration = duration;
 	delay->running = false;
-
 }
 
 bool_t delayRead( delay_t * delay ) {
@@ -87,6 +86,28 @@ void delayWrite( delay_t * delay, tick_t duration ) {
 	delay->duration = duration;
 }
 
+static tick_t durations[] = { T_1S, T_200MS, T_100MS };
+
+void updateDelay(delay_t * delay) {
+	assert_param(delay != NULL);
+
+	static idx_t idx=0;
+	static idx_t times=0;
+
+	times ++;
+	if ( times >= MAX_TIMES ) {
+		times = 0;
+		idx = ( idx + 1 ) % 3;
+		delayWrite(delay, durations[idx]);
+	}
+}
+
+void updateLedOnDelay(delay_t * delay) {
+	  if ( HAL_GPIO_ReadPin(LD2_GPIO_Port, LD2_Pin) == GPIO_PIN_RESET ) {
+		  updateDelay(delay);
+	  }
+	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+}
 
 /* USER CODE END 0 */
 
@@ -123,7 +144,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   delay_t delay;
-  tick_t duration = 100;
+  tick_t duration = durations[0];
 
   delayInit(&delay, duration);
 
@@ -131,10 +152,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
   while (1)
   {
 	  if ( delayRead(&delay) ) {
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  updateLedOnDelay(&delay);
 	  }
     /* USER CODE END WHILE */
 
