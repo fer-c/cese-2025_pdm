@@ -36,9 +36,31 @@ static void updateDelay(delay_t *delay, delay_time_matrix_t *matrix);
  */
 static void updateLedOnDelay(delay_t *delay, delay_time_matrix_t *matrix);
 
+/**
+ * @brief Actualiza el led esta en estado RESET.
+ *
+ * @return void.
+ */
+void updateLedStateReset();
+
+/**
+ * @brief Verifica si el led esta en estado RESET.
+ *
+ * @return `true` si el led esta en estado RESET, `false` en caso contrario.
+ */
+bool_t checkLedStateReset();
+
+/**
+ * @brief Cambia el estado del led.
+ *
+ * @return void.
+ */
+void toggleLedState();
+
+
 void setupAll() {
 	/* Inicializa el LD2 en estado RESET */
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	updateLedStateReset();
 }
 
 void doTask(delay_t *delay, delay_time_matrix_t *matrix) {
@@ -53,6 +75,11 @@ void doTask(delay_t *delay, delay_time_matrix_t *matrix) {
 
 /* funciones privadas */
 
+void updateLedStateReset() {
+	/* Inicializa el LD2 en estado RESET */
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+}
+
 static void updateDelay(delay_t *delay, delay_time_matrix_t *matrix) {
 	assert_param(delay != NULL);
 	assert_param(matrix != NULL);
@@ -63,9 +90,17 @@ static void updateDelay(delay_t *delay, delay_time_matrix_t *matrix) {
 	}
 }
 
+bool_t checkLedStateReset() {
+	return HAL_GPIO_ReadPin(LD2_GPIO_Port, LD2_Pin) == GPIO_PIN_RESET;
+}
+
+void toggleLedState() {
+	return HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+}
+
 static void updateLedOnDelay(delay_t *delay, delay_time_matrix_t *matrix) {
-	if (HAL_GPIO_ReadPin(LD2_GPIO_Port, LD2_Pin) == GPIO_PIN_RESET) {
+	if (checkLedStateReset()) {
 		updateDelay(delay, matrix);
 	}
-	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	toggleLedState();
 }
