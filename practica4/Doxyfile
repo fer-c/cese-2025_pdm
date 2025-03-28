@@ -1,0 +1,18 @@
+# Project related settings
+PROJECT_NAME           = "[CESE] Programación de Microcontroladores - Practica 4"
+OUTPUT_DIRECTORY       = "docs"
+
+# Input settings
+INPUT                  = API/Inc API/Src Core/Inc Core/Src
+FILE_PATTERNS          = *.c *.h
+
+# Build related settings
+EXTRACT_ALL            = YES
+RECURSIVE              = YES
+
+# HTML output settings
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+# LaTeX output settings
+GENERATE_LATEX         = NO
