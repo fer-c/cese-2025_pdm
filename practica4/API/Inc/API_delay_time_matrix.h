@@ -10,8 +10,10 @@
 
 #include "API_delay.h"
 
+/**
+ * @brief Tipo de dato para representar un indice en el array.
+ */
 typedef uint8_t index_t;
-typedef uint8_t times_t;
 
 /**
  * @brief Estructura que representa los tiempos de duración de un delay.

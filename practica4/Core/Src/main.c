@@ -22,18 +22,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "API_delay.h"
+#include "API_debounce.h"
+#include "API_delay_time_matrix.h"
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef enum{
-   BUTTON_UP,
-   BUTTON_FALLING,
-   BUTTON_DOWN,
-   BUTTON_RAISING,
-} debounceState_t;
 
 /* USER CODE END PTD */
 
@@ -52,8 +47,32 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-static debounceState_t state;
-static delay_t delayNoBloqueante;
+/**
+ * @brief Duración de 100 ms.
+ */
+const tick_t T_100MS = 100;
+/**
+ * @brief Duración de 200 ms.
+ */
+const tick_t T_200MS = 200;
+/**
+ * @brief Duración de 500 ms.
+ */
+const tick_t T_500MS = 500;
+/**
+ * @brief Duración de 1 segundo
+ */
+const tick_t T_1S = 1000;
+
+/**
+ * @brief Número de tiempos en la matriz.
+ */
+const index_t NUM_TIEMPOS = 2;
+
+/**
+ * @brief Array de duraciones para el LED.
+ */
+static tick_t TIEMPOS[] = { T_100MS, T_500MS };
 
 /* USER CODE END PV */
 
@@ -68,68 +87,7 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void debounceFSM_init(){
-	state = BUTTON_UP;
-	delayInit(&delayNoBloqueante, 40); //definir const
-}
 
-void debounceFSM_update(){
-	switch (state) {
-	case BUTTON_UP:
-		buttonReleased();
-		if (HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin))
-		{
-			delayRead(&delayNoBloqueante);
-			state = BUTTON_FALLING;
-		}
-		break;
-	case BUTTON_FALLING:
-		if (delayRead(&delayNoBloqueante))
-		{
-			if (HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin))
-			{
-				state = BUTTON_DOWN;
-			}
-			else
-			{
-				state = BUTTON_UP;
-			}
-		}
-		break;
-	case BUTTON_DOWN:
-		buttonPressed();
-		if (!HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin))
-		{
-			delayRead(&delayNoBloqueante);
-			state = BUTTON_RAISING;
-		}
-		break;
-	case BUTTON_RAISING:
-		if (delayRead(&delayNoBloqueante))
-		{
-			if (!HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin))
-			{
-				state = BUTTON_UP;
-			}
-			else
-			{
-				state = BUTTON_DOWN;
-			}
-		}
-		break;
-	default :
-		debounceFSM_init();
-		break;
-	}
-}
-
-void buttonPressed(){
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-}
-
-void buttonReleased(){
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-}
 
 /* USER CODE END 0 */
 
@@ -165,23 +123,40 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  delay_time_matrix_t delayTimeMatrix; /* Matriz de duraciones para el LED. */
+  delay_t delay; /* Delay para el LED. */
+  debounce_t debounceFSM; /* Máquina de estados para el debounce. */
 
 
-  debounceFSM_init();
+  delayTimeMatrixInit(&delayTimeMatrix, NUM_TIEMPOS, TIEMPOS); // Inicializa la matriz de duraciones
+  delayInit(&delay, delayTimeMatrixRead(&delayTimeMatrix)); // Inicializa el delay con una duración de 100 ms
+  debounceFSM_init(&debounceFSM); // Inicializa la máquina de estados para el debounce
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-	while (1) {
+  while (1) {
 
-	debounceFSM_update();
+	// Actualización del FSM de debounce
+	debounceFSM_update(&debounceFSM);
+
+	if (delayRead(&delay)) {
+
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		if (readKey(&debounceFSM)) {
+			// Cambia la duración del delay al siguiente valor
+			tick_t newDuration = delayTimeMatrixNext(&delayTimeMatrix);
+			delayWrite(&delay, newDuration); // Cambia la duración del delay
+		}
+	}
+
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	}
+  }
   /* USER CODE END 3 */
 }
 

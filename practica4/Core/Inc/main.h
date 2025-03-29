@@ -54,11 +54,6 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-void debounceFSM_init();    // debe cargar el estado inicial
-void debounceFSM_update();  // debe leer las entradas, resolver la lógica de
-                            // transición de estados y actualizar las salidas
-void buttonPressed();       // debe encender el LED
-void buttonReleased();      // debe apagar el LED
 
 /* USER CODE END EFP */
 
