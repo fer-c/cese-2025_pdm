@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['starttime_0',['startTime',['../structdelay__t.html#a7942cc879b9d2a429b4d2e1977fa52b9',1,'delay_t']]],
-  ['systemcoreclock_1',['SystemCoreClock',['../group___s_t_m32_f4xx___system___private___variables.html#gaa3cd3e43291e81e795d642b79b6088e6',1,'system_stm32f4xx.c']]]
+  ['num_5fdurations_0',['num_durations',['../structdelay__time__matrix__t.html#a03bbf5e6dbae0df554cd9bea9e125115',1,'delay_time_matrix_t']]],
+  ['num_5ftiempos_1',['NUM_TIEMPOS',['../main_8c.html#a8a9b0b6458b2f3624b4d01390db09d47',1,'main.c']]]
 ];

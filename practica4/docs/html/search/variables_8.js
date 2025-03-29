@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['times_0',['times',['../structduration__times__t.html#a1335d370ca8ff0e188db03928e437597',1,'duration_times_t']]]
+  ['running_0',['running',['../structdelay__t.html#a51adcd9342dc17747393922120c285e4',1,'delay_t']]]
 ];

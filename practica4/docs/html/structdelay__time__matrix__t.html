@@ -118,35 +118,16 @@ $(function(){initNavTree('structdelay__time__matrix__t.html',''); initResizable(
 Public Attributes</h2></td></tr>
 <tr class="memitem:a03bbf5e6dbae0df554cd9bea9e125115" id="r_a03bbf5e6dbae0df554cd9bea9e125115"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_a_p_i__delay__time__matrix_8h.html#a9ff1c947b95fe8029f3efefacb3d9094">index_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03bbf5e6dbae0df554cd9bea9e125115">num_durations</a></td></tr>
 <tr class="separator:a03bbf5e6dbae0df554cd9bea9e125115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac06afc5d69477897b0f2b8a72e8d487f" id="r_ac06afc5d69477897b0f2b8a72e8d487f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structduration__times__t.html">duration_times_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac06afc5d69477897b0f2b8a72e8d487f">durations</a></td></tr>
-<tr class="separator:ac06afc5d69477897b0f2b8a72e8d487f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d9cc9e235d0bade06d9a5cf3cff081" id="r_af6d9cc9e235d0bade06d9a5cf3cff081"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_a_p_i__delay_8h.html#a451a7d205dfb766727eba25c6e61c687">tick_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6d9cc9e235d0bade06d9a5cf3cff081">durations</a></td></tr>
+<tr class="separator:af6d9cc9e235d0bade06d9a5cf3cff081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78ffd6ae404ac687ea68367088f15db3" id="r_a78ffd6ae404ac687ea68367088f15db3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_a_p_i__delay__time__matrix_8h.html#a9ff1c947b95fe8029f3efefacb3d9094">index_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78ffd6ae404ac687ea68367088f15db3">current_idx</a></td></tr>
 <tr class="separator:a78ffd6ae404ac687ea68367088f15db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa525ea24be931cff2603e042bf7d4157" id="r_aa525ea24be931cff2603e042bf7d4157"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_a_p_i__delay__time__matrix_8h.html#ae28d364f9580bfe52cb80b6e07a2e3b5">times_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa525ea24be931cff2603e042bf7d4157">current_attempt</a></td></tr>
-<tr class="separator:aa525ea24be931cff2603e042bf7d4157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Estructura que representa los tiempos de duración de un delay. </p>
 <p>Esta estructura se utiliza para gestionar duraciones de ejecución de un delay en base a una array de duraciones.</p>
-<p>Para ello se define un array de duraciones y un array de repeticiones para cada duración.</p>
-<p>De esta forma, se puede definir un delay que se ejecutará con una duración determinada en un número de veces determinado.</p>
 <dl class="section note"><dt>Note</dt><dd>Se debe inicializar la matriz con la función delayMatrixInit. </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa525ea24be931cff2603e042bf7d4157" name="aa525ea24be931cff2603e042bf7d4157"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa525ea24be931cff2603e042bf7d4157">&#9670;&#160;</a></span>current_attempt</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="_a_p_i__delay__time__matrix_8h.html#ae28d364f9580bfe52cb80b6e07a2e3b5">times_t</a> delay_time_matrix_t::current_attempt</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>cantidad de intentos en la duración actual. </p>
-
-</div>
-</div>
 <a id="a78ffd6ae404ac687ea68367088f15db3" name="a78ffd6ae404ac687ea68367088f15db3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78ffd6ae404ac687ea68367088f15db3">&#9670;&#160;</a></span>current_idx</h2>
 
@@ -162,14 +143,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac06afc5d69477897b0f2b8a72e8d487f" name="ac06afc5d69477897b0f2b8a72e8d487f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac06afc5d69477897b0f2b8a72e8d487f">&#9670;&#160;</a></span>durations</h2>
+<a id="af6d9cc9e235d0bade06d9a5cf3cff081" name="af6d9cc9e235d0bade06d9a5cf3cff081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d9cc9e235d0bade06d9a5cf3cff081">&#9670;&#160;</a></span>durations</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structduration__times__t.html">duration_times_t</a>* delay_time_matrix_t::durations</td>
+          <td class="memname"><a class="el" href="_a_p_i__delay_8h.html#a451a7d205dfb766727eba25c6e61c687">tick_t</a>* delay_time_matrix_t::durations</td>
         </tr>
       </table>
 </div><div class="memdoc">

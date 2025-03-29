@@ -1,5 +1,6 @@
 var dir_8f99107d0e0934685a1a9ec97126304f =
 [
+    [ "API_debounce.h", "_a_p_i__debounce_8h.html", "_a_p_i__debounce_8h" ],
     [ "API_delay.h", "_a_p_i__delay_8h.html", "_a_p_i__delay_8h" ],
     [ "API_delay_time_matrix.h", "_a_p_i__delay__time__matrix_8h.html", "_a_p_i__delay__time__matrix_8h" ]
 ];

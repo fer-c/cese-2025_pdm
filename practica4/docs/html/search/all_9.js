@@ -9,5 +9,7 @@ var searchData=
   ['main_6',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main.c']]],
   ['main_2ec_7',['main.c',['../main_8c.html',1,'']]],
   ['main_2eh_8',['main.h',['../main_8h.html',1,'']]],
-  ['memmanage_5fhandler_9',['MemManage_Handler',['../stm32f4xx__it_8h.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c']]]
+  ['memmanage_5fhandler_9',['MemManage_Handler',['../stm32f4xx__it_8h.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c']]],
+  ['mx_5fgpio_5finit_10',['MX_GPIO_Init',['../main_8c.html#ae89fdd15729ad41a66911190fcbab23a',1,'main.c']]],
+  ['mx_5fusart2_5fuart_5finit_11',['MX_USART2_UART_Init',['../main_8c.html#a6db1014d713f6f5c0f52a13299ee0733',1,'main.c']]]
 ];

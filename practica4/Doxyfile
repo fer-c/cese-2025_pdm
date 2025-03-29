@@ -9,6 +9,8 @@ FILE_PATTERNS          = *.c *.h
 # Build related settings
 EXTRACT_ALL            = YES
 RECURSIVE              = YES
+EXTRACT_STATIC         = YES
+MACRO_EXPANSION        = YES
 
 # HTML output settings
 GENERATE_HTML          = YES

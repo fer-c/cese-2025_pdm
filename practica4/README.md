@@ -26,71 +26,67 @@ doxygen Doxyfile
 
 ## Diagramas
 
-### Diagrama de sequencia
+### sequencia de llamadas
 
 ```mermaid
 sequenceDiagram
-    participant MainLoop as Main Loop
-    participant debounceFSM_update as debounceFSM_update
-    participant HAL_GPIO_ReadPin as BTN_Pin
-    participant delayRead as delayRead
-    participant buttonPressed as buttonPressed
-    participant buttonReleased as buttonReleased
-    participant led as LD2_Pin
+    participant MainProgram as ====== Main ======
+    participant fsm as         ================ FSM  ===============
+    participant matrix as      ====== delay_time_matrix_t ======
+    participant LedDelay as    ====== delay_t ======
 
-    MainLoop->>debounceFSM_update: Call debounceFSM_update()
-    alt state == BUTTON_UP
-        debounceFSM_update->>buttonReleased: Call buttonReleased() (BUTTON_UP state)
-        buttonReleased->>led: HAL_GPIO_WritePin(GPIO_PIN_SET)
-        debounceFSM_update->>HAL_GPIO_ReadPin: Read BTN_Pin (BUTTON_UP state)
-        alt BTN_Pin == HIGH
-            debounceFSM_update->>delayRead: Start delay (BUTTON_FALLING state)
+    MainProgram->>matrix: delayTimeMatrixInit
+    MainProgram->>LedDelay: delayInit
+    MainProgram->>fsm: debounceFSM_init
+
+    loop
+        MainProgram->>fsm: debounceFSM_update()
+        alt 
+        alt Transición BUTTON_FALLING -> BUTTON_DOWN
+            fsm -->> fsm: buttonPressed()
+            Note Right of fsm: btn_pressed = true
         end
-    end
-
-    alt state == BUTTON_FALLING
-        debounceFSM_update->>delayRead: Check delay (BUTTON_FALLING state)
-        alt delayRead() == true
-            debounceFSM_update->>HAL_GPIO_ReadPin: Read BTN_Pin (BUTTON_FALLING state)
+        alt Transición BUTTON_RAISING -> BUTTON_UP
+            fsm -->> fsm: buttonReleased()
+            Note Right of fsm: 
         end
-    end
-
-    alt state == BUTTON_DOWN
-        debounceFSM_update->>buttonPressed: Call buttonPressed() (BUTTON_DOWN state)
-        buttonPressed->>led: HAL_GPIO_WritePin(GPIO_PIN_RESET)
-        debounceFSM_update->>HAL_GPIO_ReadPin: Read BTN_Pin (BUTTON_DOWN state)
-        alt BTN_Pin == LOW
-            debounceFSM_update->>delayRead: Start delay (BUTTON_RAISING state)
         end
-    end
 
-    alt state == BUTTON_RAISING
-        debounceFSM_update->>delayRead: Check delay (BUTTON_RAISING state)
-        alt delayRead() == true
-            debounceFSM_update->>HAL_GPIO_ReadPin: Read BTN_Pin (BUTTON_RAISING state)
+        MainProgram->>LedDelay: delayRead
+        LedDelay-->>MainProgram: 
+        alt delayRead
+            MainProgram->>fsm: readKey
+            Note Right of fsm: btn_pressed = false
+            fsm-->>MainProgram: 
+            alt readKey == true
+                MainProgram->>matrix: delayTimeMatrixNext
+                matrix-->>MainProgram: newDuration
+                MainProgram->>LedDelay: delayWrite(newDuration)
+            end
         end
     end
 ```
 
-### Diagrama de estado
+### Diagrama de estado debounceFSM
 
 ```mermaid
+
 stateDiagram-v2
-    BUTTON_UP: BUTTON_UP buttonReleased()
-    BUTTON_UP --> BUTTON_FALLING: BTN_Pin <- GPIO_PIN_SET
-    BUTTON_UP --> BUTTON_UP: BTN_Pin <- GPIO_PIN_RESET
+    state BUTTON_UP
+    state BUTTON_FALLING
+    state BUTTON_RAISING
+    state BUTTON_DOWN    
 
-    BUTTON_DOWN: BUTTON_DOWN buttonPressed()
-    BUTTON_DOWN --> BUTTON_RAISING: BTN_Pin <- GPIO_PIN_RESET
-    BUTTON_DOWN --> BUTTON_DOWN: BTN_Pin <- GPIO_PIN_SET
+    [*] --> BUTTON_UP
+    BUTTON_UP --> BUTTON_FALLING: HAL_GPIO_ReadPin == true
 
-    BUTTON_RAISING: 
-    BUTTON_RAISING --> BUTTON_UP: delayRead() && <br> BTN_Pin <- GPIO_PIN_RESET
-    BUTTON_RAISING --> BUTTON_DOWN: delayRead() && <br> BTN_Pin <- GPIO_PIN_SET
+    BUTTON_FALLING --> BUTTON_UP: delayRead && HAL_GPIO_ReadPin == false
+    BUTTON_FALLING --> BUTTON_DOWN: delayRead && HAL_GPIO_ReadPin == true
 
-    BUTTON_FALLING: 
-    BUTTON_FALLING --> BUTTON_DOWN: delayRead() && <br> BTN_Pin <- GPIO_PIN_SET
-    BUTTON_FALLING --> BUTTON_UP: delayRead() && <br> BTN_Pin <- GPIO_PIN_RESET
+    BUTTON_DOWN --> BUTTON_RAISING: HAL_GPIO_ReadPin == false
+
+    BUTTON_RAISING --> BUTTON_DOWN: delayRead && HAL_GPIO_ReadPin == true
+    BUTTON_RAISING --> BUTTON_UP: delayRead && HAL_GPIO_ReadPin == false
 
 ```
 
