@@ -8,19 +8,23 @@ Practicas desarrollados para la placa [STM32F446RE](https://www.st.com/en/evalua
 
 ## Documentación del producto
 
-- [STM32 Cortex®-M4 programming manual](docs/pm0214-stm32-cortexm4-mcus-and-mpus-programming-manual-stmicroelectronics.pdf)
+- [NUCLEO-XXXXRX schematic](docs/mb1136-nucleo-xxxxrx-block-diagrams-default-c04_schematic.pdf)
 
-- [STM32F446xx - Reference manual](docs/rm0390-stm32f446xx-advanced-arm-based-32-bit-mcus-stmicroelectronics-en.pdf)
+- [PM0214 - Programming manual - STM32 Cortex®-M4 MCUs and MPUs programming manual](docs/pm0214-programming-manual-stm32-cortexm4-mcus-and-mpus-programming-manual-stmicroelectronics.pdf)
 
-- [STM32F446xx - User manual](docs/um3461-stm32f4-series-ulcsaiec-607301603351-selftest-library-user-guide-stmicroelectronics.pdf)
+- [RM0390 - Reference manual - STM32F446xx advanced Arm®-based 32-bit MCUs](docs/rm0390-reference-manual-stm32f446xx-advanced-arm-based-32-bit-mcus-stmicroelectronics-en.pdf)
 
-- [Datasheet - STM32F446xC/E](docs/stm32f446re.pdf)
+- [STM32F446xC/E Manual](docs/stm32f446re.pdf)
 
-- [STM32CubeIDE User Manual](docs/um2609-stm32cubeide-user-guide-stmicroelectronics.pdf)
+- [UM1718 - STM32CubeMX for STM32 configuration and initialization C code generation - User manual](docs/um1718-stm32cubemx-for-stm32-configuration-and-initialization-c-code-generation-stmicroelectronics.pdf)
 
-- [STM32CubeMX User Manual](docs/um1718-stm32cubemx-for-stm32-configuration-and-initialization-c-code-generation-stmicroelectronics.pdf)
+- [UM1724 User manual STM32 Nucleo-64 boards (MB1136)](docs/um1724-user_manual-dm00105823.pdf)
 
-- [NUCLEO-XXXXRX schematic](docs/mb1136-default-c04_schematic.pdf)
+- [UM1725 User manual Description of STM32F4 HAL and low-layer drivers](docs/um1725-user-manual-dm00105879-description-of-stm32f4-hal-and-lowlayer-drivers-stmicroelectronics.pdf)
+
+- [UM2609 STM32CubeIDE user guide - User manual](docs/um2609-stm32cubeide-user-guide-stmicroelectronics.pdf)
+
+- [UM3461 STM32F4 series UL/CSA/IEC 60730-1/60335-1 self-test library user guide  - User manual](docs/um3461-stm32f4-series-ulcsaiec-607301603351-selftest-library-user-guide-stmicroelectronics.pdf)
 
 ## Software necesario
 
