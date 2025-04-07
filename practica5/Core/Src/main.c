@@ -123,7 +123,7 @@ static uint8_t obtenerCommando() {
 
 /**
   * @brief  The application entry point.
-  * @retval int
+  * @return int
   */
 int main(void)
 {
@@ -219,7 +219,7 @@ int main(void)
 
 /**
   * @brief System Clock Configuration
-  * @retval None
+  * @return None
   */
 void SystemClock_Config(void)
 {
@@ -261,7 +261,7 @@ void SystemClock_Config(void)
 /**
   * @brief USART2 Initialization Function
   * @param None
-  * @retval None
+  * @return None
   */
 static void MX_USART2_UART_Init(void)
 {
@@ -296,7 +296,7 @@ static void MX_USART2_UART_Init(void)
 /**
   * @brief GPIO Initialization Function
   * @param None
-  * @retval None
+  * @return None
   */
 static void MX_GPIO_Init(void)
 {
@@ -336,7 +336,7 @@ static void MX_GPIO_Init(void)
 
 /**
   * @brief  This function is executed in case of error occurrence.
-  * @retval None
+  * @return None
   */
 void Error_Handler(void)
 {
@@ -354,7 +354,7 @@ void Error_Handler(void)
   *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
-  * @retval None
+  * @return None
   */
 void assert_failed(uint8_t *file, uint32_t line)
 {

@@ -30,28 +30,28 @@ void debounceFSM_error(debounce_t *fsm);
 /**
  * @brief  Logica de la FSM para el estado BUTTON_UP.
  * @param  fsm Puntero a la máquina de estados
- * @retval None
+ * @return None
  */
 void updateStateButtonUp(debounce_t *fsm);
 
 /**
  * @brief  Logica de la FSM para el estado BUTTON_FALLING
  * @param  fsm Puntero a la máquina de estados
- * @retval None
+ * @return None
  */
 void updateStateButtonFalling(debounce_t *fsm);
 
 /**
  * @brief  Logica de la FSM para el estado BUTTON_DOWN
  * @param  fsm Puntero a la máquina de estados
- * @retval None
+ * @return None
  */
 void updateStateButtonDown(debounce_t *fsm);
 
 /**
  * @brief  Logica de la FSM para el estado BUTTON_RAISING
  * @param  fsm Puntero a la máquina de estados
- * @retval None
+ * @return None
  */
 void updateStateButtonRaising(debounce_t *fsm);
 
@@ -101,7 +101,7 @@ void debounceFSM_update(debounce_t *fsm) {
 /**
  * @brief  Verifica si el botón está presionado.
  * @param  None
- * @retval true si el botón está presionado, false en caso contrario.
+ * @return true si el botón está presionado, false en caso contrario.
  */
 static bool_t isButtonPressed() {
   GPIO_PinState buttonPinState = HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin);
@@ -111,7 +111,7 @@ static bool_t isButtonPressed() {
 /**
  * @brief  Verifica si el botón está liberado.
  * @param  None
- * @retval true si el botón está liberado, false en caso contrario.
+ * @return true si el botón está liberado, false en caso contrario.
  */
 static bool_t isButtonReleased() {
   GPIO_PinState buttonPinState = HAL_GPIO_ReadPin(BTN_GPIO_Port, BTN_Pin);

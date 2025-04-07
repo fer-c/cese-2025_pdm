@@ -81,7 +81,7 @@ void HAL_MspInit(void)
   * @brief UART MSP Initialization
   * This function configures the hardware resources used in this example
   * @param huart: UART handle pointer
-  * @retval None
+  * @return None
   */
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
@@ -121,7 +121,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   * @brief UART MSP De-Initialization
   * This function freeze the hardware resources used in this example
   * @param huart: UART handle pointer
-  * @retval None
+  * @return None
   */
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {

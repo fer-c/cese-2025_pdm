@@ -162,7 +162,7 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   *         Initialize the FPU setting, vector table location and External memory 
   *         configuration.
   * @param  None
-  * @retval None
+  * @return None
   */
 void SystemInit(void)
 {
@@ -215,7 +215,7 @@ void SystemInit(void)
   *           value for HSE crystal.
   *     
   * @param  None
-  * @retval None
+  * @return None
   */
 void SystemCoreClockUpdate(void)
 {
@@ -274,7 +274,7 @@ void SystemCoreClockUpdate(void)
   *         This function configures the external memories (SRAM/SDRAM)
   *         This SRAM/SDRAM will be used as program data memory (including heap and stack).
   * @param  None
-  * @retval None
+  * @return None
   */
 void SystemInit_ExtMemCtl(void)
 {
@@ -440,7 +440,7 @@ void SystemInit_ExtMemCtl(void)
   *         This function configures the external memories (SRAM/SDRAM)
   *         This SRAM/SDRAM will be used as program data memory (including heap and stack).
   * @param  None
-  * @retval None
+  * @return None
   */
 void SystemInit_ExtMemCtl(void)
 {
