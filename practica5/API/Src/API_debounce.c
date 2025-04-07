@@ -6,6 +6,7 @@
  */
 
 #include "API_debounce.h"
+#include "API_uart.h"
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
@@ -160,8 +161,12 @@ void updateStateButtonRaising(debounce_t *fsm) {
 }
 
 void buttonPressed(debounce_t *fsm) {
-	fsm->btn_pressed = true; // El botón fue presionado
+  fsm->btn_pressed = true; // El botón fue presionado
+  uint8_t *msg = (uint8_t *)"Flanco descendente detectado\r\n";
+  uartSendString(msg);
 }
 
 void buttonReleased(debounce_t *fsm) {
+  uint8_t *msg = (uint8_t *)"Flanco ascendente detectado\r\n";
+  uartSendString(msg);
 }
