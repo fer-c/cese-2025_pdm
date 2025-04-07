@@ -18,35 +18,35 @@ bool_t uartInit();
 /**
  * @brief Envia un comando para limpiar la pantalla por el UART
  * @param none
- * @retVal: none
+ * @return: none
  */
 void uartSendClearScreen();
 
 /**
  * @brief Envia la configuracion del UART por el UART
  * @param none
- * @retVal: none
+ * @return: none
  */
 void uartSendConfiguration();
 
 /**
  * @brief Envia un byte por el UART
  * @param byte: byte a enviar
- * @retVal: none
+ * @return: none
  */
 void uartSendString(uint8_t * pstring);
 
 /**
  * @brief Recibe un byte por el UART
  * @param byte: puntero a la variable donde se guardara el byte recibido
- * @retVal: none
+ * @return: none
  */
 void uartSendStringSize(uint8_t * pstring, uint16_t size);
 
 /**
  * @brief Recibe un byte por el UART
  * @param byte: puntero a la variable donde se guardara el byte recibido
- * @retVal: none
+ * @return: none
  */
 void uartReceiveStringSize(uint8_t * pstring, uint16_t size);
 

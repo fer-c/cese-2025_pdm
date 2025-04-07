@@ -40,6 +40,6 @@ static void MX_USART2_UART_Init(void)
 
 La documentación por Doxygen se encuentra en [docs](docs/html/index.html) generada con:
 
-```
+```sh
 doxygen Doxyfile
 ```

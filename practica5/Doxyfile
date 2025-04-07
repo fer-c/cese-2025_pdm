@@ -1,5 +1,5 @@
 # Project related settings
-PROJECT_NAME           = "[CESE] Programación de Microcontroladores - Practica 4"
+PROJECT_NAME           = "[CESE] Programación de Microcontroladores - Practica 5"
 OUTPUT_DIRECTORY       = "docs"
 
 # Input settings
