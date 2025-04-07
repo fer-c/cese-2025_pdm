@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include <string.h>
 #include "API_debounce.h"
 #include "API_delay_time_matrix.h"
 #include "API_uart.h"
@@ -71,6 +72,11 @@ const tick_t T_1S = 1000;
 const index_t NUM_TIEMPOS = 2;
 
 /**
+ * @brief Tamaño max del comando.
+ */
+const index_t CMD_SIZE = 10;
+
+/**
  * @brief Array de duraciones para el LED.
  */
 static tick_t TIEMPOS[] = { T_100MS, T_500MS };
@@ -88,7 +94,30 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+static void initCmd(uint8_t *cmd, uint8_t size) {
+  for (uint8_t i = 0; i < size; i++) {
+    cmd[i] = 0;
+  }
+}
 
+static void sendEcho(uint8_t *cmd) {
+  char *echo = strcat((char *)cmd, "\r\n"); // Agrega un salto de línea al comando
+  uartSendString((uint8_t *)echo); // Envía el comando recibido por UART
+}
+
+static uint8_t obtenerCommando() {
+  static uint8_t buffer[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Inicializa el comando
+
+  uartReceiveStringSize(buffer, CMD_SIZE); // Recibe el comando por UART
+  uint8_t cmd = buffer[0]; // Almacena el primer byte del comando en cmd
+
+  if (cmd != 0) {
+    sendEcho(buffer); // Envía el eco del comando recibido
+  }
+  initCmd(buffer, CMD_SIZE);
+
+  return cmd; // Devuelve el comando recibido
+}
 
 /* USER CODE END 0 */
 
@@ -139,21 +168,46 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  tick_t newDuration = delayTimeMatrixRead(&delayTimeMatrix); // Lee la duración inicial de la matriz
 
   while (1) {
 
-	// Actualización del FSM de debounce
-	debounceFSM_update(&debounceFSM);
+    // Actualización del FSM de debounce
+    debounceFSM_update(&debounceFSM);
+    uint8_t cmd = obtenerCommando();
+    switch (cmd) {
+      case 'c':
+        uartSendClearScreen(); // Borra la pantalla
+        uartSendConfiguration(); // Envía la configuración del UART
+        break;
+      case '1':
+        newDuration = T_100MS; // Cambia la duración del delay a 100 ms
+        uartSendString((uint8_t *)"Delay: 100 ms\r\n");
+        break;
+      case '2':
+        newDuration = T_200MS; // Cambia la duración del delay a 200 ms
+        uartSendString((uint8_t *)"Delay: 200 ms\r\n");
+        break;
+      case '3':
+        newDuration = T_500MS; // Cambia la duración del delay a 500 ms
+        uartSendString((uint8_t *)"Delay: 500 ms\r\n");
+        break;
+      case '4':
+        newDuration = T_1S; // Cambia la duración del delay a 1 segundo
+        uartSendString((uint8_t *)"Delay: 1 s\r\n");
+        break;
+      default:
+        break; // Comando no reconocido
+    }
 
-	if (delayRead(&delay)) {
-
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		if (readKey(&debounceFSM)) {
-			// Cambia la duración del delay al siguiente valor
-			tick_t newDuration = delayTimeMatrixNext(&delayTimeMatrix);
-			delayWrite(&delay, newDuration); // Cambia la duración del delay
-		}
-	}
+    if (delayRead(&delay)) {
+      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+      if (readKey(&debounceFSM)) {
+        // Cambia la duración del delay al siguiente valor
+        newDuration = delayTimeMatrixNext(&delayTimeMatrix);
+      }
+      delayWrite(&delay, newDuration); // Cambia la duración del delay
+    }
 
 
     /* USER CODE END WHILE */

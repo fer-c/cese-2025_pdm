@@ -16,6 +16,20 @@
 bool_t uartInit();
 
 /**
+ * @brief Envia un comando para limpiar la pantalla por el UART
+ * @param none
+ * @retVal: none
+ */
+void uartSendClearScreen();
+
+/**
+ * @brief Envia la configuracion del UART por el UART
+ * @param none
+ * @retVal: none
+ */
+void uartSendConfiguration();
+
+/**
  * @brief Envia un byte por el UART
  * @param byte: byte a enviar
  * @retVal: none
