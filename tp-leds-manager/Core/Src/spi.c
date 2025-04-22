@@ -32,6 +32,8 @@ void MX_SPI1_Init(void)
 
   /* USER CODE BEGIN SPI1_Init 0 */
 
+    return; // This function is not used in the current implementation
+
   /* USER CODE END SPI1_Init 0 */
 
   /* USER CODE BEGIN SPI1_Init 1 */
